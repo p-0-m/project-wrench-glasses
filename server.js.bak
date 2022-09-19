@@ -1,0 +1,48 @@
+const express = require('express')
+const path = require('path')
+const Sentiment = require('sentiment')
+
+//Just to test
+const mongo = require('mongodb')
+ 
+const port = 3000
+const app = express()
+
+var MongoClient = mongo.MongoClient;
+var MongoUrl = "mongodb://localhost:27017/"
+
+MongoClient.connect(MongoUrl, function(err,db){
+	if (err) throw err;
+	
+	var dbo = db.db("mydb");
+	dbo.createCollection("customers", function(err, res) {
+		console.log("collection created");
+		var myobj = {
+		name: "test",
+		address: "Montreal"
+	}
+	dbo.collection("customers").insertOne(myobj, function(err, res) {
+		console.log("document inserted");
+		db.close();
+	});
+	} )
+	
+	});
+
+app.use(express.static(path.join(__dirname, 'public')))
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'index.html'))
+})
+
+app.get('/emotion', function(req, res) {
+  const sentiment = new Sentiment()
+  const text = req.query.text
+  const score = sentiment.analyze(text)
+
+  res.send(score)
+})
+
+app.listen(port, function() {
+  console.log(`Listening on port ${port}`)
+})

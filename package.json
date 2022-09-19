@@ -1,0 +1,21 @@
+{
+  "name": "speech-to-emotion",
+  "version": "1.0.0",
+  "description": "Convert speech into an emotional reaction",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start-debug": "nodemon --inspect server.js"
+  },
+  "author": "daspinola",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "expressjs": "^1.0.1",
+    "mongodb": "^4.9.1",
+    "sentiment": "^5.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
