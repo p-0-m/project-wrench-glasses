@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', speechToEmotion, false)
 function speechToEmotion() {
   const recognition = new webkitSpeechRecognition()
   
-  recognition.lang = 'fr-FR' // Recognized speech will be in French so set the French word dictinary 
+  recognition.lang = 'en-EN' // Recognized speech will be in French so set the French word dictinary 
   recognition.continuous = false
   recognition.onresult = function(event) {
 	// get the recognized speech in the event as variable
